@@ -1,0 +1,48 @@
+// head {
+@__nodeId__: ~"ss_components_cats_ui__tile_imageOnly";
+// }
+
+.@{__nodeId__}[vmd5='@{vmd5}'] {
+    background-color: #616161;
+    border-radius: 7px;
+    overflow: hidden;
+    padding: 0;
+    min-width: @imageWidth;
+    max-width: @imageWidth;
+
+    transition: background-color 0.3s;
+
+    a {
+        display: block;
+
+        .image {
+            display: flex;
+            justify-content: center;
+            background-color: #FFFFFF;
+            width: @imageWidth;
+            height: @imageHeight;
+        }
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+
+    &:hover {
+        background-color: #404040;
+    }
+
+    @cnd: @imageWidth + @imageWidth / 5;
+
+    @media all and (max-width: @cnd) {
+        min-width: 85vw;
+        max-width: 85vw;
+
+        > .section {
+
+            .image {
+                width: 95vw;
+            }
+        }
+    }
+}

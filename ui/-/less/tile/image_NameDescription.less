@@ -1,0 +1,57 @@
+.@{__nodeId__} {
+    width: 100%;
+
+    a {
+        display: flex;
+        align-items: center;
+
+        .image {
+            display: flex;
+            justify-content: center;
+            width: @imageWidth;
+            min-width: @imageWidth;
+            height: @imageHeight;
+            overflow: hidden;
+        }
+
+        .name_and_description {
+
+            .name_container {
+
+                .name {
+
+                }
+            }
+
+            .description {
+
+            }
+        }
+
+        &:hover {
+            text-decoration: none;
+
+            .name {
+
+            }
+        }
+    }
+
+    &:hover {
+
+    }
+
+    @cnd: @imageWidth + @imageWidth / 5;
+
+    @media all and (max-width: @cnd) {
+        min-width: 85vw;
+        max-width: 85vw;
+
+        > .section {
+
+            .image {
+                width: 95vw;
+            }
+        }
+    }
+}

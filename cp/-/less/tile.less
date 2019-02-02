@@ -1,0 +1,95 @@
+// head {
+@__nodeId__: ~"ss_components_cats_cp__tile";
+// }
+
+.@{__nodeId__} {
+    display: flex;
+
+    > .appearance, > .options {
+        margin-right: 20px;
+
+        > .row {
+            padding: 2px 0;
+
+            > .label {
+                padding: 5px 0;
+                font-size: 11px;
+                font-weight: bold;
+            }
+
+            > .control {
+                display: flex;
+
+                input {
+                    padding: 5px;
+                    border: 1px solid #E0E0E0;
+                    border-radius: 3px;
+                    width: 100%;
+                    box-sizing: border-box;
+
+                    transition: border-color 0.3s;
+
+                    &:focus {
+                        border-color: #A0A0A0;
+                    }
+
+                    &.updating {
+                        border-color: #F9132C;
+                    }
+
+                    &.saved {
+                        border-color: #6BB75F;
+                    }
+                }
+
+                &.image_size {
+                    display: flex;
+
+                    input {
+                        width: 52px;
+
+                        &.image_dimension[field='width'] {
+                            margin-right: 5px;
+                        }
+                    }
+                }
+
+                .toggle() {
+                    cursor: pointer;
+                    float: left;
+                    padding: 3px 8px;
+                    background-color: #E0E0E0;
+                    border-radius: 3px;
+
+                    &:hover {
+                        background-color: #D0D0D0;
+                    }
+
+                    &.enabled {
+                        background-color: #55AA55;
+                        color: #AAFFAA;
+
+                        &:hover {
+                            background-color: #4C934C;
+                        }
+                    }
+                }
+
+                .toggle {
+                    .toggle;
+                }
+            }
+
+            &.l2 {
+
+                .label {
+                    margin-left: 20px;
+                }
+
+                .control {
+                    margin-left: 20px;
+                }
+            }
+        }
+    }
+}
