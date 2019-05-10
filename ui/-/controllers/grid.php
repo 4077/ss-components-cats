@@ -25,10 +25,10 @@ class Grid extends \Controller
 
         $ss = ss();
 
-        /**
-         * @var $cTileApp \ss\components\cats\ui\controllers\tile\App
-         */
-        $cTileApp = $this->c('@tile/app');
+//        /**
+//         * @var $cTileApp \ss\components\cats\ui\controllers\tile\App
+//         */
+//        $cTileApp = $this->c('@tile/app');
 
         $cat = $this->cat;
         $pivot = $this->pivot;
@@ -160,6 +160,12 @@ class Grid extends \Controller
             $v->assign('not_published_mark', [
                 'HIDDEN_CLASS' => $page->published ? 'hidden' : ''
             ]);
+
+            if ($page->hiddenByPublisher) {
+                $v->assign('hidden_by_publisher_mark', [
+                    'HIDDEN_CLASS' => $page->published ? 'hidden' : ''
+                ]);
+            }
         }
 
         return $v;
@@ -205,12 +211,34 @@ class Grid extends \Controller
 
         $globalEditable = $ss->globalEditable();
 
-        $pages = $cat->containedPages()->orderBy('position')->get();
+        $pages = table_rows_by_id($cat->containedPages()->orderBy('position')->get());
+
+        // pagesSorter {
+        $order = $this->c('^ svc:getOrder', [
+            'cat' => $cat
+        ]);
+
+        if ($order) {
+            $pages = map($pages, $order);
+        }
+        // }
+
+        // pagesPublisher {
+        $publishedList = $this->c('^ svc:getPublishedList', [
+            'cat' => $cat
+        ]);
+        // }
 
         $output = [];
 
         foreach ($pages as $page) {
-            $catVisible = $page->enabled && ($page->published || $globalEditable);
+            if ($publishedList) {
+                $page->hiddenByPublisher = !($publishedList[$page->id] ?? true);
+            } else {
+                $page->hiddenByPublisher = false;
+            }
+
+            $catVisible = $page->enabled && (($page->published && !$page->hiddenByPublisher) || $globalEditable);
 
             if ($catVisible) {
                 $output[] = $page;
